@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -32,11 +33,21 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public Long update(Product product) {
-        return null;
+        Optional<ProductEntity> optionalProduct=repository.findById(product.getId());
+        if(optionalProduct.isPresent()){
+            ProductEntity productEntity=optionalProduct.get();
+            productEntity.setName(product.getName());
+            productEntity.setDescription(product.getDescription());
+            productEntity.setSupplier(product.getSupplier());
+            productEntity.setCategory(product.getCategory().getValue());
+            productEntity.setActive(product.isActive());
+            return repository.save(productEntity).getId();
+        }
+        throw new RuntimeException("Product not found with id " + product.getId());
     }
 
     @Override
     public void delete(Long id) {
-
+        repository.deleteById(id);
     }
 }

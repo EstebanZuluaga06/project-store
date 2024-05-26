@@ -1,5 +1,6 @@
 package co.uco.doo.store.api.application.services;
 
+import co.uco.doo.store.api.domain.exceptions.ProductExceptions;
 import co.uco.doo.store.api.domain.models.Product;
 import co.uco.doo.store.api.domain.ports.inputs.ProductService;
 import co.uco.doo.store.api.domain.ports.outputs.ProductRepository;
@@ -30,11 +31,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Long update(Product product) {
-        return null;
+        return productRepository.update(product);
     }
 
     @Override
     public void delete(Long id) {
-
+        productRepository.delete(id);
     }
 }

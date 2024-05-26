@@ -1,5 +1,6 @@
 package co.uco.doo.store.api.infrastructure.entrypoints.controllers;
 
+import co.uco.doo.store.api.domain.exceptions.ProductExceptions;
 import co.uco.doo.store.api.domain.ports.inputs.ProductService;
 import co.uco.doo.store.api.infrastructure.entrypoints.dtos.ProductDto;
 import lombok.AllArgsConstructor;
@@ -38,23 +39,18 @@ public class ProductController {
         Long id= productService.create(product.ToProduct());
         return getById(id);
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<String> update(@PathVariable Long id,@RequestBody ProductDto product)
-    {
-        return new ResponseEntity<>("update product"+ product.getName(),HttpStatus.ACCEPTED);
+    @PutMapping
+    public ResponseEntity<ProductDto> update(@RequestBody ProductDto product) throws ProductExceptions {
+        Long id = productService.update(product.ToProduct());
+        return getById(id);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id)
     {
+        productService.delete(id);
         return new ResponseEntity<>("delete product"+ id.toString(),HttpStatus.ACCEPTED);
     }
 
-
-    private List<ProductDto> gteProducts()
-    {
-        ProductDto productResponse=new ProductDto(1L,"camisa","camisa blanca","Nike","Ropa",true);
-        return Arrays.asList(productResponse);
-    }
 
 }
