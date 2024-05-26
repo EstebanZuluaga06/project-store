@@ -15,7 +15,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     @Override
     public Product getProductById(Long id) {
-        return null;
+        return productRepository.getProductById(id);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Long create(Product product) {
-        return null;
+        return productRepository.create(product);
     }
 
     @Override

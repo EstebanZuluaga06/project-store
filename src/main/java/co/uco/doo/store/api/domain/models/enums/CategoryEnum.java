@@ -30,4 +30,14 @@ public enum CategoryEnum {
         }
         throw new IllegalArgumentException("No se encontró una categoría con el valor especificado: " + value);
     }
+
+    public static CategoryEnum getByDescription(String description) {
+        for (CategoryEnum category : CategoryEnum.values()) {
+            String name=category.getName();
+            if (name.equals(description)) {
+                return category;
+            }
+        }
+        throw new IllegalArgumentException("No se encontró una categoría con el valor especificado: " + description);
+    }
 }

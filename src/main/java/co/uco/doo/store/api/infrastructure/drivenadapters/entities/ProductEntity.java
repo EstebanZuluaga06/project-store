@@ -3,13 +3,16 @@ package co.uco.doo.store.api.infrastructure.drivenadapters.entities;
 import co.uco.doo.store.api.domain.models.Product;
 import co.uco.doo.store.api.domain.models.enums.CategoryEnum;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name="products")
 @Getter
 @Setter
+@AllArgsConstructor
 public class ProductEntity {
 
     @Id
@@ -27,6 +30,17 @@ public class ProductEntity {
     @Column(name="is_active")
     private boolean isActive;
 
+    public ProductEntity() {
+    }
+
+    public ProductEntity(String name, String description, String supplier, int category, boolean isActive) {
+        this.name = name;
+        this.description = description;
+        this.supplier = supplier;
+        this.category = category;
+        this.isActive = isActive;
+    }
+
     public Product ToProduct()
     {
         return Product.builder()
@@ -37,5 +51,15 @@ public class ProductEntity {
                 .category(CategoryEnum.getByValue(category))
                 .isActive(isActive)
                 .build();
+    }
+
+    public static ProductEntity from(Product product){
+        return new ProductEntity(
+                product.getName(),
+                product.getDescription(),
+                product.getSupplier(),
+                product.getCategory().getValue(),
+                product.isActive()
+        );
     }
 }

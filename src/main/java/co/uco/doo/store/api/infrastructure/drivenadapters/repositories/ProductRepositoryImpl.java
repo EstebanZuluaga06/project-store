@@ -17,7 +17,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     private final JpaProductRepository repository;
     @Override
     public Product getProductById(Long id) {
-        return null;
+        return repository.findById(id).map(ProductEntity::ToProduct).orElse(null);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public Long create(Product product) {
-        return null;
+        return repository.save(ProductEntity.from(product)).getId();
     }
 
     @Override

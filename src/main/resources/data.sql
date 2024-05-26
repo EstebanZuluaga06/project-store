@@ -6,6 +6,3 @@ CREATE TABLE products (
     category VARCHAR(255),
     is_active BOOLEAN
 );
-
-INSERT INTO products (name, description, supplier, category, is_active) VALUES ('Producto1', 'Descripción del Producto 1', 'Proveedor 1', 1, TRUE);
-INSERT INTO products (name, description, supplier, category, is_active) VALUES ('Producto2', 'Descripción del Producto 2', 'Proveedor 2', 2, TRUE);

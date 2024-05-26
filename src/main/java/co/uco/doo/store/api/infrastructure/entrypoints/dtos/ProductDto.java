@@ -1,12 +1,13 @@
 package co.uco.doo.store.api.infrastructure.entrypoints.dtos;
 
 import co.uco.doo.store.api.domain.models.Product;
+import co.uco.doo.store.api.domain.models.enums.CategoryEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ProductResponse {
+public class ProductDto {
     private Long id;
     private String name;
     private String description;
@@ -15,8 +16,8 @@ public class ProductResponse {
     private boolean isActive;
 
 
-    public static ProductResponse from(Product product){
-        return new ProductResponse(
+    public static ProductDto from(Product product){
+        return new ProductDto(
                 product.getId(),
                 product.getName(),
                 product.getDescription(),
@@ -25,4 +26,17 @@ public class ProductResponse {
                 product.isActive()
         );
     }
+
+    public Product ToProduct()
+    {
+        return Product.builder()
+                .id(id)
+                .name(name)
+                .description(description)
+                .supplier(supplier)
+                .category(CategoryEnum.getByDescription(category))
+                .isActive(isActive)
+                .build();
+    }
+
 }
