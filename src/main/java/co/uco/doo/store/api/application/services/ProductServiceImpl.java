@@ -1,5 +1,7 @@
 package co.uco.doo.store.api.application.services;
 
+import co.uco.doo.store.api.application.rules.Rule;
+import co.uco.doo.store.api.application.rules.TypeEnum;
 import co.uco.doo.store.api.domain.exceptions.ProductExceptions;
 import co.uco.doo.store.api.domain.models.Product;
 import co.uco.doo.store.api.domain.ports.inputs.ProductService;
@@ -14,6 +16,7 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+    private final Rule rule;
     @Override
     public Product getProductById(Long id) {
         return productRepository.getProductById(id);
@@ -25,7 +28,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Long create(Product product) {
+    public Long create(Product product) throws ProductExceptions {
+        rule.Validate(product, TypeEnum.CREATE);
         return productRepository.create(product);
     }
 
