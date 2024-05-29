@@ -40,7 +40,6 @@ public class ProductRepositoryImpl implements ProductRepository {
             productEntity.setDescription(product.getDescription());
             productEntity.setSupplier(product.getSupplier());
             productEntity.setCategory(product.getCategory().getValue());
-            productEntity.setActive(product.isActive());
             return repository.save(productEntity).getId();
         }
         throw new RuntimeException("Product not found with id " + product.getId());

@@ -10,6 +10,6 @@ public interface ProductService {
     List<Product> getAll();
     Long create(Product product) throws ProductExceptions;
     Long update(Product product) throws ProductExceptions;
-    void delete(Long id);
+    void delete(Product product) throws ProductExceptions;
 
 }

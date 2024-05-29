@@ -13,8 +13,6 @@ public class ProductDto {
     private String description;
     private String supplier;
     private String category;
-    private boolean isActive;
-
 
     public static ProductDto from(Product product){
         return new ProductDto(
@@ -22,8 +20,7 @@ public class ProductDto {
                 product.getName(),
                 product.getDescription(),
                 product.getSupplier(),
-                product.getCategory().getName(),
-                product.isActive()
+                product.getCategory().getName()
         );
     }
 
@@ -35,7 +32,6 @@ public class ProductDto {
                 .description(description)
                 .supplier(supplier)
                 .category(CategoryEnum.getByDescription(category))
-                .isActive(isActive)
                 .build();
     }
 

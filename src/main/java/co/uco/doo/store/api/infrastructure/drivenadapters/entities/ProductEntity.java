@@ -16,7 +16,7 @@ import lombok.Setter;
 public class ProductEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name="id")
     private Long id;
     @Column(name="name")
@@ -27,18 +27,16 @@ public class ProductEntity {
     private String supplier;
     @Column(name="category")
     private int category;
-    @Column(name="is_active")
-    private boolean isActive;
 
     public ProductEntity() {
     }
 
-    public ProductEntity(String name, String description, String supplier, int category, boolean isActive) {
+    public ProductEntity(String name, String description, String supplier, int category) {
         this.name = name;
         this.description = description;
         this.supplier = supplier;
         this.category = category;
-        this.isActive = isActive;
+
     }
 
     public Product ToProduct()
@@ -49,7 +47,6 @@ public class ProductEntity {
                 .description(description)
                 .supplier(supplier)
                 .category(CategoryEnum.getByValue(category))
-                .isActive(isActive)
                 .build();
     }
 
@@ -58,8 +55,7 @@ public class ProductEntity {
                 product.getName(),
                 product.getDescription(),
                 product.getSupplier(),
-                product.getCategory().getValue(),
-                product.isActive()
+                product.getCategory().getValue()
         );
     }
 }

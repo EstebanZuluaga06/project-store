@@ -34,12 +34,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Long update(Product product) {
+    public Long update(Product product) throws ProductExceptions {
+        rule.Validate(product, TypeEnum.UPDATE);
         return productRepository.update(product);
     }
 
     @Override
-    public void delete(Long id) {
-        productRepository.delete(id);
+    public void delete(Product product) throws ProductExceptions {
+        rule.Validate(product,TypeEnum.DELETE);
+        productRepository.delete(product.getId());
     }
 }

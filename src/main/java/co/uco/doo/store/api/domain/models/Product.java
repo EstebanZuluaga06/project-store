@@ -12,5 +12,4 @@ public class Product {
     private String description;
     private String supplier;
     private CategoryEnum category;
-    private boolean isActive;
 }
