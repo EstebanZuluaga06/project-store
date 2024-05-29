@@ -1,5 +1,7 @@
 package co.uco.doo.store.api.domain.models.enums;
 
+import co.uco.doo.store.api.domain.exceptions.ProductExceptions;
+
 public enum CategoryEnum {
 
     TENNIS(1,"Tennis"),
@@ -22,22 +24,22 @@ public enum CategoryEnum {
         return name;
     }
 
-    public static CategoryEnum getByValue(int value) {
+    public static CategoryEnum getByValue(int value) throws ProductExceptions {
         for (CategoryEnum category : CategoryEnum.values()) {
             if (category.getValue() == value) {
                 return category;
             }
         }
-        throw new IllegalArgumentException("No se encontró una categoría con el valor especificado: " + value);
+        throw new ProductExceptions("No se encontró una categoría con el valor especificado: " + value);
     }
 
-    public static CategoryEnum getByDescription(String description) {
+    public static CategoryEnum getByDescription(String description) throws ProductExceptions {
         for (CategoryEnum category : CategoryEnum.values()) {
             String name=category.getName();
             if (name.equals(description)) {
                 return category;
             }
         }
-        throw new IllegalArgumentException("No se encontró una categoría con el valor especificado: " + description);
+        throw new ProductExceptions("No se encontró una categoría con el valor especificado: " + description);
     }
 }

@@ -1,5 +1,6 @@
 package co.uco.doo.store.api.infrastructure.drivenadapters.repositories;
 
+import co.uco.doo.store.api.domain.exceptions.ProductExceptions;
 import co.uco.doo.store.api.domain.models.Product;
 import co.uco.doo.store.api.domain.ports.outputs.ProductRepository;
 import co.uco.doo.store.api.infrastructure.drivenadapters.entities.ProductEntity;
@@ -18,12 +19,25 @@ public class ProductRepositoryImpl implements ProductRepository {
     private final JpaProductRepository repository;
     @Override
     public Product getProductById(Long id) {
-        return repository.findById(id).map(ProductEntity::ToProduct).orElse(null);
+        Product product = repository.findById(id).map(productEntity -> {
+            try {
+                return productEntity.ToProduct();
+            } catch (ProductExceptions e) {
+                throw new RuntimeException(e);
+            }
+        }).orElse(null);
+        return product;
     }
 
     @Override
     public List<Product> getAll() {
-       return repository.findAll().stream().map(ProductEntity::ToProduct).collect(Collectors.toList());
+       return repository.findAll().stream().map(productEntity -> {
+           try {
+               return productEntity.ToProduct();
+           } catch (ProductExceptions e) {
+               throw new RuntimeException(e);
+           }
+       }).collect(Collectors.toList());
     }
 
     @Override

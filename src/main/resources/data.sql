@@ -6,5 +6,3 @@ CREATE TABLE products (
     category VARCHAR(255)
 );
 
-INSERT INTO products (name, description, supplier, category) VALUES ('Producto1', 'Descripción del Producto 1', 'Proveedor 1', 1);
-INSERT INTO products (name, description, supplier, category) VALUES ('Producto2', 'Descripción del Producto 2', 'Proveedor 2', 2);

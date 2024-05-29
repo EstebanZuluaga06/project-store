@@ -1,5 +1,6 @@
 package co.uco.doo.store.api.infrastructure.entrypoints.dtos;
 
+import co.uco.doo.store.api.domain.exceptions.ProductExceptions;
 import co.uco.doo.store.api.domain.models.Product;
 import co.uco.doo.store.api.domain.models.enums.CategoryEnum;
 import lombok.AllArgsConstructor;
@@ -24,8 +25,7 @@ public class ProductDto {
         );
     }
 
-    public Product ToProduct()
-    {
+    public Product ToProduct() throws ProductExceptions {
         return Product.builder()
                 .id(id)
                 .name(name)
